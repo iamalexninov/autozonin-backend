@@ -4,11 +4,12 @@ const router = require("express").Router();
 // [] - login
 // [] - logout
 // [] - edit user
-function signUp(req, res) {
+
+async function signUp(req, res) {
   res.json("register");
 }
 
-function signIn(req, res) {
+async function signIn(req, res) {
   res.json("login");
 }
 

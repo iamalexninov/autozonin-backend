@@ -1,5 +1,5 @@
 module.exports = {
   PORT: 5000,
   DB_URL:
-    "mongodb+srv://aleks:aleks123456@zonin.zgxnlyw.mongodb.net/?retryWrites=true&w=majority&appName=zonin",
+    "mongodb+srv://aleksn:aleksn123456@zonincars.xinwiaz.mongodb.net/?retryWrites=true&w=majority&appName=zonincars",
 };

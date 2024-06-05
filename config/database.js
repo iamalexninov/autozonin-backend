@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
-const {} = require('./config')
+const { DB_URL } = require("./config");
 
 module.exports = async () => {
   try {
-    mongoose.connect();
+    mongoose.connect(DB_URL, {});
     console.log("Run Database...");
   } catch (error) {
     console.error(error);

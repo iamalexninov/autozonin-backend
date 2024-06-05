@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { register } = require("../services/auth");
 
 // [] - register
 // [] - login
@@ -6,7 +7,15 @@ const router = require("express").Router();
 // [] - edit user
 
 async function signUp(req, res) {
-  res.json("register");
+  const userData = {
+    username: req.body.username,
+    email: req.body.email,
+    phone: req.body.phone,
+    password: req.body.password,
+  };
+
+  const token = await register(userData);
+  res.status(201).json(token);
 }
 
 async function signIn(req, res) {

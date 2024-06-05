@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "start": "nodemon ./app.js"
+  },
   "name": "zonin-showroom-server",
   "packageManager": "yarn@3.5.1",
   "dependencies": {

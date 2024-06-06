@@ -7,6 +7,6 @@ const app = express();
 require("./config/database")();
 require("./config/express")(app);
 
-app.use(routes);
+app.use("/api", routes);
 
 app.listen(PORT, console.log(`Run server on Port:${PORT}`));

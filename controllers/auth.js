@@ -22,7 +22,7 @@ async function signIn(req, res) {
   res.json("login");
 }
 
-router.post("/signup", signUp);
+router.post("/register", signUp);
 router.post("/signin", signIn);
 
 module.exports = router;

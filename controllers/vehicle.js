@@ -1,10 +1,17 @@
 const router = require("express").Router();
+const { create } = require("../services/vehicle");
 
 async function addVehicle(req, res) {
-  res.json("Router works");
+  const data = {
+    details: req.body.details,
+    price: req.body.price,
+  };
+
+  const vehicle = await create(data);
+
+  res.json(vehicle);
 }
 
-router.get("/create", addVehicle);
-// router.post("/create", addVehicle);
+router.post("/create", addVehicle);
 
 module.exports = router;

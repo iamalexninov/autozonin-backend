@@ -6,9 +6,9 @@ const Features = require("./Features");
 // favorite,like,owner,reviews,test-drives - more
 
 const vehicleSchema = new Schema({
-  details: Details.schema,
-  features: Features.schema,
-  price: Price.schema,
+  details: Details,
+  price: Price,
+  // features: Features.schema,
 });
 
 const Vehicle = model("Vehicle", vehicleSchema);

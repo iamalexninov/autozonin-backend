@@ -1,6 +1,6 @@
-const { Schema, Types, model } = require("mongoose");
+const { Schema, model } = require("mongoose");
 
-const vehicleSchema = new Schema({
+const detailsSchema = new Schema({
   title: { type: String },
   tagline: { type: String },
   category: {
@@ -60,53 +60,8 @@ const vehicleSchema = new Schema({
   doors: { type: String },
   offerType: { type: String, enum: ["sell", "loan", "hot-offer"] },
   vin: { type: String },
-  interiorFeatures: {
-    type: String,
-    enum: [
-      "Air Conditioner",
-      "Digital Odometer",
-      "Heater",
-      "Leather Seats",
-      "Panoramic Moonroof",
-      "Tachometer",
-      "Touchscreen Display",
-      "Anti-lock Braking",
-    ],
-  },
-  safetyFeatures: {
-    type: String,
-    enum: [
-      "Brake Assist",
-      "Child Safety Locks",
-      "Driver Air Bag",
-      "Power Door Locks",
-      "Stability Control",
-      "Traction Control",
-    ],
-  },
-  exteriorFeatures: {
-    type: String,
-    enum: [
-      "Fog Lights Front",
-      "Rain Sensing Wiper",
-      "Rear Spoiler",
-      "Windows - Electric",
-    ],
-  },
-  comfortFeatures: {
-    type: String,
-    enum: [
-      "Android Auto",
-      "Apple CarPlay",
-      "Bluetooth",
-      "HomeLink",
-      "Power Steering",
-      "Vanity Mirror",
-    ],
-  },
-  // favorite,like,owner,reviews,test-drives - more
 });
 
-const Vehicle = model("Vehicle", vehicleSchema);
+const Details = model("Details", detailsSchema);
 
-module.exports = Vehicle;
+module.exports = Details;

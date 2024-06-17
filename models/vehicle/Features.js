@@ -1,5 +1,3 @@
-const { Schema, model } = require("mongoose");
-
 const interiorOptions = [
   "leatherSeats",
   "heatedSeats",
@@ -72,13 +70,11 @@ const safetyOptions = [
   "anti-theftSystem",
 ];
 
-const featuresSchema = new Schema({
+const featuresSchema = {
   interior: { type: String, enum: interiorOptions, default: [] },
   exterior: { type: String, enum: exteriorOptions, default: [] },
   comfort: { type: String, enum: comfortOptions, default: [] },
   safety: { type: String, enum: safetyOptions, default: [] },
-});
+};
 
-const Features = model("Features", featuresSchema);
-
-module.exports = Features;
+module.exports = featuresSchema;

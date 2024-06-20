@@ -1,24 +1,36 @@
 const router = require("express").Router();
-const { getVehicles, create } = require("../services/vehicle");
+const {
+  getVehicles,
+  createVehicle,
+  getVehicle,
+} = require("../services/vehicle");
 
-const renderVehicles = async (req, res) => {
+router.get("/:id", async (req, res) => {
+  const { id } = req.body.id;
+
+  try {
+    const vehicle = await getVehicle(id);
+    res.status(201).json(vehicle);
+  } catch (error) {
+    // error
+  }
+});
+
+router("/", async (req, res) => {
   const vehicles = await getVehicles();
   res.json(vehicles);
-};
+});
 
-async function addVehicle(req, res) {
+router.post("/create", async (req, res) => {
   const data = {
+    banners: req.body.banners,
     details: req.body.details,
     price: req.body.price,
   };
 
-  const vehicle = await create(data);
+  const vehicle = await createVehicle(data);
 
   res.json(vehicle);
-}
-
-
-router.get("/", renderVehicles);
-router.post("/create", addVehicle);
+});
 
 module.exports = router;

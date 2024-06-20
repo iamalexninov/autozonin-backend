@@ -1,15 +1,14 @@
 const { Schema, Types, model } = require("mongoose");
 
+const banners = require("./banners");
 const details = require("./details");
 const price = require("./price");
-const media = require("./media");
-const Features = require("./Features");
 // favorite,like,owner,reviews,test-drives - more
 
 const vehicleSchema = new Schema({
-  media,
-  details,
-  price,
+  banners: banners,
+  details: details,
+  price: price,
 });
 
 const Vehicle = model("Vehicle", vehicleSchema);

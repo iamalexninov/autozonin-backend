@@ -1,8 +1,14 @@
 const Vehicle = require("../models/vehicle/Vehicle");
 
-const getVehicles = async () => await Vehicle.find({});
+async function getVehicle(id) {
+  return await Vehicle.findById(id);
+}
 
-const create = async (data) => {
+async function getVehicles() {
+  return await Vehicle.find({});
+}
+
+async function createVehicle(data) {
   // details: {
   //   title: "2022 Mercedes-Benz E 53 AMG Sedan",
   //   tagline: "Unleash Performance and Luxury",
@@ -31,6 +37,7 @@ const create = async (data) => {
   // },
 
   const vehicle = new Vehicle({
+    banners: data.banners,
     details: data.details,
     price: data.price,
   });
@@ -38,9 +45,10 @@ const create = async (data) => {
   await vehicle.save();
 
   return vehicle;
-};
+}
 
 module.exports = {
+  getVehicle,
   getVehicles,
-  create,
+  createVehicle,
 };

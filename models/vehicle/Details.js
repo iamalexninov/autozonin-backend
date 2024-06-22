@@ -23,11 +23,9 @@ const typeEnum = [
 const driveTypeEnum = ["all", "front", "rear"];
 const transmissionEnum = ["automatic", "manual", "cvt", "dct"];
 const fuelEnum = ["diesel", "electric", "petrol", "hybrid", "gasoline"];
+const offerEnum = ["hot", "sell", "loan", "lease", "tradeIn"];
 
-function requiredText(label) {
-  const text = `Vehicle ${label} field is required. Please fill it.`;
-  return [true, text];
-}
+const { requiredText } = require("../../utils/utils");
 
 const details = {
   title: { type: String, required: requiredText("Title") },
@@ -58,7 +56,6 @@ const details = {
     enum: transmissionEnum,
     required: requiredText("Transmission"),
   },
-  // TODO: use enum
   fuelType: {
     type: String,
     enum: fuelEnum,
@@ -70,7 +67,12 @@ const details = {
   cylinder: { type: Number, required: requiredText("Cylinder") },
   color: { type: String, required: requiredText("Color") },
   doors: { type: Number, required: requiredText("Doors") },
-  // TODO: use enum
+  offerType: {
+    type: String,
+    enum: offerEnum,
+    required: requiredText("Offer Type"),
+    default: "sell",
+  },
   vin: { type: String },
   description: { type: String, required: requiredText("Description") },
 };

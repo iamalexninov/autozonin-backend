@@ -1,3 +1,4 @@
+// change it - should be - bus, car, motor ...
 const categoryEnum = ["new", "used", "damaged"];
 const labelEnum = [
   "greatPrice",

@@ -1,28 +1,34 @@
 const router = require("express").Router();
-const { register } = require("../services/auth");
+const { register, login } = require("../services/auth");
 
-// [] - register
-// [] - login
-// [] - logout
-// [] - edit user
-
-async function signUp(req, res) {
-  const userData = {
+router.post("/register", async (req, res) => {
+  const data = {
     username: req.body.username,
     email: req.body.email,
     phone: req.body.phone,
     password: req.body.password,
   };
 
-  const token = await register(userData);
-  res.status(201).json(token);
-}
+  try {
+    const token = await register(data);
+    res.status(204).json(token);
+  } catch (error) {
+    console.error(error);
+  }
+});
 
-async function signIn(req, res) {
-  res.json("login");
-}
+router.post("/login", async (req, res) => {
+  const data = {
+    email: req.body.email,
+    password: req.body.password,
+  };
 
-router.post("/register", signUp);
-router.post("/signin", signIn);
+  try {
+    const token = await login(data);
+    res.status(201).json(token);
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 module.exports = router;

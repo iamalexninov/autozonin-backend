@@ -3,7 +3,9 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { SALT_ROUNDS, SECRET } = require("../config/config");
 
-async function registerUser(data) {
+const blacklist = [];
+
+async function register(data) {
   const existing = await User.findOne({
     username: data.username,
     email: data.email,
@@ -21,29 +23,52 @@ async function registerUser(data) {
 
   await user.save();
 
-  return createToken(user);
+  return createSession(user);
 }
 
-function loginUser(data) {}
+async function login(email, password) {
+  const user = await User.findOne({ email: new RegExp(`^${email}$`, "i") });
+  if (!user) throw new Error("User doesn't exists. Please Sign Up.");
+
+  const hasMatch = await bcrypt.compare(password, user.password);
+  if (!hasMatch)
+    throw new Error("Incorrect Email or Password. Please, Try Again.");
+
+  return createSession(user);
+}
+
+function logout(token) {
+  blacklist.push(token);
+}
 
 async function hashPassword(password) {
   return await bcrypt.hash(password, SALT_ROUNDS);
 }
 
-async function createToken(user) {
-  return jwt.sign(
-    {
-      _id: user._id,
-      username: user.username,
-      email: user.email,
-      phone: user.phone,
-      password: user.password,
-    },
-    SECRET
-  );
+function createSession(user) {
+  return {
+    _id: user._id,
+    email: user.email,
+    username: user.username,
+    type: user.type,
+    accessToken: jwt.sign({ _id: user._id, email: user.email }, SECRET),
+  };
+}
+
+function verifySession(token) {
+  const payload = jwt.verify(token, SECRET);
+
+  return {
+    _id: payload._id,
+    email: payload.email,
+    username: payload.username,
+    token,
+  };
 }
 
 module.exports = {
-  register: registerUser,
-  login: loginUser,
+  register,
+  login,
+  logout,
+  verifySession,
 };

@@ -29,8 +29,8 @@ router.post("/create", async (req, res) => {
     price: req.body.price,
   };
 
+  console.log(data);
   const vehicle = await createVehicle(data);
-
   res.json(vehicle);
 });
 

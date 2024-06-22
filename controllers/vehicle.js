@@ -1,22 +1,23 @@
 const router = require("express").Router();
 const {
+  getVehicle,
   getVehicles,
   createVehicle,
-  getVehicle,
 } = require("../services/vehicle");
 
 router.get("/:id", async (req, res) => {
-  const { id } = req.body.id;
+  const id = req.params.id;
+  console.log(id);
 
   try {
     const vehicle = await getVehicle(id);
-    res.status(201).json(vehicle);
+    res.json(vehicle);
   } catch (error) {
     // error
   }
 });
 
-router("/", async (req, res) => {
+router.get("/", async (req, res) => {
   const vehicles = await getVehicles();
   res.json(vehicles);
 });

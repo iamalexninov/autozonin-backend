@@ -1,5 +1,15 @@
 const router = require("express").Router();
-const { register, login } = require("../services/auth");
+const { getUsers, register, login } = require("../services/auth");
+
+// TODO: test
+router.get("/users", async (req, res) => {
+  try {
+    const users = await getUsers();
+    res.json(users);
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 router.post("/register", async (req, res) => {
   const data = {
@@ -11,7 +21,7 @@ router.post("/register", async (req, res) => {
 
   try {
     const token = await register(data);
-    res.status(204).json(token);
+    res.json(token)
   } catch (error) {
     console.error(error);
   }
@@ -24,8 +34,8 @@ router.post("/login", async (req, res) => {
   };
 
   try {
-    const token = await login(data);
-    res.status(201).json(token);
+    const token = await login(data.email, data.password);
+    res.json(token);
   } catch (error) {
     console.error(error);
   }

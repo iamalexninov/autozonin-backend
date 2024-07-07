@@ -5,13 +5,16 @@ const { SALT_ROUNDS, SECRET } = require("../config/config");
 
 const blacklist = [];
 
+async function getUsers() {
+  return await User.find({});
+}
+
 async function register(data) {
   const existing = await User.findOne({
-    username: data.username,
     email: data.email,
   });
 
-  const errorMsg = "Username or Email already exists. Try Again.";
+  const errorMsg = "User already exists. Try Again.";
   if (existing) throw new Error(errorMsg);
 
   const user = new User({
@@ -23,7 +26,8 @@ async function register(data) {
 
   await user.save();
 
-  return createSession(user);
+  const token = createSession(user);
+  return token;
 }
 
 async function login(email, password) {
@@ -50,8 +54,11 @@ function createSession(user) {
     _id: user._id,
     email: user.email,
     username: user.username,
-    type: user.type,
-    accessToken: jwt.sign({ _id: user._id, email: user.email }, SECRET),
+    // type: user.type,
+    accessToken: jwt.sign(
+      { _id: user._id, email: user.email, username: user.username },
+      SECRET
+    ),
   };
 }
 
@@ -67,6 +74,7 @@ function verifySession(token) {
 }
 
 module.exports = {
+  getUsers,
   register,
   login,
   logout,

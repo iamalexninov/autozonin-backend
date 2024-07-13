@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const { getUsers, register, login } = require("../services/auth");
+const { isAdmin, isGuest } = require("../middlewares/guards");
 
-// TODO: test
-router.get("/users", async (req, res) => {
+router.get("/users", isAdmin(), async (req, res) => {
   try {
     const users = await getUsers();
     res.json(users);
@@ -11,7 +11,7 @@ router.get("/users", async (req, res) => {
   }
 });
 
-router.post("/register", async (req, res) => {
+router.post("/register", isGuest(), async (req, res) => {
   const data = {
     username: req.body.username,
     email: req.body.email,
@@ -21,13 +21,13 @@ router.post("/register", async (req, res) => {
 
   try {
     const token = await register(data);
-    res.json(token)
+    res.json(token);
   } catch (error) {
     console.error(error);
   }
 });
 
-router.post("/login", async (req, res) => {
+router.post("/login", isGuest(), async (req, res) => {
   const data = {
     email: req.body.email,
     password: req.body.password,

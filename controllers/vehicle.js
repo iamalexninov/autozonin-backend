@@ -12,10 +12,13 @@ router.get("/:id", async (req, res) => {
   try {
     const vehicle = await getVehicle(id);
     res.json(vehicle);
-  } catch (error) {
-    // error
-  }
+  } catch (error) {}
 });
+
+router.get("/makes",async(req,res)=>{
+  const vehicles = await getVehicles();
+  res.json(vehicles);
+})
 
 router.get("/", async (req, res) => {
   const vehicles = await getVehicles();
@@ -26,10 +29,10 @@ router.post("/create", async (req, res) => {
   const data = {
     banners: req.body.banners,
     details: req.body.details,
+    features: req.body.features,
     price: req.body.price,
   };
 
-  console.log(data);
   const vehicle = await createVehicle(data);
   res.json(vehicle);
 });

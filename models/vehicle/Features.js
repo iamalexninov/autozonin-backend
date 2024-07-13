@@ -20,13 +20,13 @@ const exteriorOptions = [
   "alloyWheels",
   "panoramicRoof",
   "fogLights",
-  "LEDHeadlights",
+  "ledHeadlights",
   "powerTailgate",
   "roofRails",
   "chromeAccents",
   "rearSpoiler",
   "powerFoldingMirrors",
-  "rain-sensingWipers",
+  "rainSensingWipers",
   "headlightWashers",
   "automaticHighBeams",
   "daytimeRunningLights",
@@ -67,7 +67,7 @@ const safetyOptions = [
   "driverAttentionMonitoring",
   "nightVision",
   "tirePressureMonitoring",
-  "anti-theftSystem",
+  "antiTheftSystem",
 ];
 
 const featuresSchema = {

@@ -1,4 +1,4 @@
-const Vehicle = require("../models/vehicle/Vehicle");
+const Vehicle = require("../models/Vehicle");
 
 async function getVehicle(id) {
   return await Vehicle.findById(id);

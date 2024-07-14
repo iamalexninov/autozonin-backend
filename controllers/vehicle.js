@@ -7,18 +7,12 @@ const {
 
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
-  console.log(id);
 
   try {
     const vehicle = await getVehicle(id);
     res.json(vehicle);
   } catch (error) {}
 });
-
-router.get("/makes",async(req,res)=>{
-  const vehicles = await getVehicles();
-  res.json(vehicles);
-})
 
 router.get("/", async (req, res) => {
   const vehicles = await getVehicles();

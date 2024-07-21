@@ -21,10 +21,10 @@ router.get("/", async (req, res) => {
 
 router.post("/create", async (req, res) => {
   const data = {
-    banners: req.body.banners,
+    banner: req.body.banner,
     details: req.body.details,
     features: req.body.features,
-    price: req.body.price,
+    price: Number(req.body.price),
   };
 
   const vehicle = await createVehicle(data);

@@ -1,78 +1,90 @@
-const { Schema, Types, model } = require("mongoose");
-
-const { requiredText } = require("../utils/utils");
+const { Schema, model } = require("mongoose");
 
 const vehicleSchema = new Schema({
-  banners: { type: String, default: [] },
+  banner: { type: String },
   details: {
-    title: { type: String, required: requiredText("Title") },
-    tagline: { type: String, required: requiredText("Tagline") },
-    condition: {
+    title: {
       type: String,
-      enum: ["new", "used", "damaged"],
-      required: requiredText("Category"),
+      required: [true, "Title of the vehicle is required."],
+    },
+    tagline: {
+      type: String,
+      required: [true, "Tagline of the vehicle is required."],
+    },
+    category: {
+      type: String,
+      required: [true, "Category of the vehicle is required."],
     },
     label: { type: String },
+    condition: {
+      type: String,
+      required: [true, "Condition of the vehicle is required."],
+    },
     type: {
       type: String,
-      enum: [
-        "sedan",
-        "suv",
-        "truck",
-        "coupe",
-        "convertible",
-        "hatchback",
-        "minivan",
-        "stationWagon",
-        "crossover",
-        "hybrid",
-      ],
-      required: requiredText("Type"),
+      required: [true, "Type of the vehicle is required."],
     },
-    make: { type: String, required: requiredText("Make") },
-    model: { type: String, required: requiredText("Model") },
-    specification: { type: String, required: requiredText("Specification") },
-    year: { type: Number, required: requiredText("Year") },
-    driveType: { type: String, enum: ["all", "front", "rear"] },
+    make: {
+      type: String,
+      required: [true, "Make of the vehicle is required."],
+    },
+    model: {
+      type: String,
+      required: [true, "Model of the vehicle is required."],
+    },
+    specification: {
+      type: String,
+      required: [true, "Specification of the vehicle is required."],
+    },
+    year: {
+      type: String,
+      required: [true, "Year of the vehicle is required."],
+    },
+    driveType: {
+      type: String,
+      required: [true, "Year of the vehicle is required."],
+    },
     transmission: {
       type: String,
-      enum: ["automatic", "manual", "cvt", "dct"],
-      required: requiredText("Transmission"),
+      required: [true, "Year of the vehicle is required."],
     },
-    fuelType: {
+    fuel: {
       type: String,
-      enum: ["diesel", "electric", "petrol", "hybrid", "gasoline"],
-      required: requiredText("Fuel Type"),
+      required: [true, "Year of the vehicle is required."],
     },
-    mileage: { type: Number, required: requiredText("Mileage") },
-    engineSize: { type: Number, required: requiredText("Engine Size") },
-    torque: { type: Number, required: requiredText("Torque") },
-    cylinder: { type: Number, required: requiredText("Cylinder") },
-    color: { type: String, required: requiredText("Color") },
-    doors: { type: Number, required: requiredText("Doors") },
-    offerType: {
+    mileage: {
+      type: Number,
+      required: [true, "Year of the vehicle is required."],
+    },
+    engineSize: {
+      type: Number,
+      required: [true, "Year of the vehicle is required."],
+    },
+    cylinder: {
+      type: Number,
+      required: [true, "Year of the vehicle is required."],
+    },
+    color: {
       type: String,
-      enum: ["hot", "sell", "loan", "lease", "tradeIn"],
-      required: requiredText("Offer Type"),
-      default: "sell",
+      required: [true, "Year of the vehicle is required."],
+    },
+    door: {
+      type: Number,
+      required: [true, "Year of the vehicle is required."],
     },
     vin: { type: String },
-    description: { type: String, required: requiredText("Description") },
+    description: {
+      type: String,
+      required: [true, "Year of the vehicle is required."],
+    },
   },
   features: {
-    interior: { type: String, default: [] },
-    exterior: { type: String, default: [] },
-    comfort: { type: String, default: [] },
-    safety: { type: String, default: [] },
+    interior: [{ type: String }],
+    exterior: [{ type: String }],
+    safety: [{ type: String }],
+    comfort: [{ type: String }],
   },
-  price: {
-    amount: { type: Number },
-    currency: { type: String, default: "€" },
-    negotiable: { type: Boolean, default: false },
-    leaseAvailable: { type: Boolean, default: false },
-    leaseInititalPayment: { type: Number },
-    monthlyPayment: { type: Number },
-  },
+  price: { type: Number },
 });
 
 const Vehicle = model("Vehicle", vehicleSchema);

@@ -42,40 +42,40 @@ const vehicleSchema = new Schema({
     },
     driveType: {
       type: String,
-      required: [true, "Year of the vehicle is required."],
+      required: [true, "Drive Type of the vehicle is required."],
     },
     transmission: {
       type: String,
-      required: [true, "Year of the vehicle is required."],
+      required: [true, "Transmission of the vehicle is required."],
     },
     fuel: {
       type: String,
-      required: [true, "Year of the vehicle is required."],
+      required: [true, "Fuel of the vehicle is required."],
     },
     mileage: {
       type: Number,
-      required: [true, "Year of the vehicle is required."],
+      required: [true, "Mileage of the vehicle is required."],
     },
     engineSize: {
       type: Number,
-      required: [true, "Year of the vehicle is required."],
+      required: [true, "Engine Size of the vehicle is required."],
     },
     cylinder: {
       type: Number,
-      required: [true, "Year of the vehicle is required."],
+      required: [true, "Cylinder of the vehicle is required."],
     },
     color: {
       type: String,
-      required: [true, "Year of the vehicle is required."],
+      required: [true, "Color of the vehicle is required."],
     },
     door: {
       type: Number,
-      required: [true, "Year of the vehicle is required."],
+      required: [true, "Door of the vehicle is required."],
     },
     vin: { type: String },
     description: {
       type: String,
-      required: [true, "Year of the vehicle is required."],
+      required: [true, "Description of the vehicle is required."],
     },
   },
   features: {

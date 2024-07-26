@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const Vehicle = require("../models/Vehicle");
 const {
   getVehicle,
   getVehicles,
@@ -15,34 +16,22 @@ router.get("/:id", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-  const { category, condition, type, make, model } = req.query;
+  const { condition, category, type, make, model } = req.query;
 
-  let result;
-  const vehicles = await getVehicles();
+  let filter = {};
 
-  result = vehicles;
+  if (category) filter["details.category"] = category;
+  if (condition) filter["details.condition"] = condition;
+  if (type) filter["details.type"] = type;
+  if (make) filter["details.make"] = make;
+  if (model) filter["details.model"] = model;
 
-  if (category) {
-    result = vehicles.filter((item) => item.details.category === category);
+  try {
+    const vehicles = await getVehicles(filter);
+    res.status(201).json(vehicles);
+  } catch (error) {
+    console.error(error);
   }
-
-  if (condition) {
-    result = vehicles.filter((item) => item.details.condition === condition);
-  }
-
-  if (type) {
-    result = vehicles.filter((item) => item.details.type === type);
-  }
-
-  if (make) {
-    result = vehicles.filter((item) => item.details.make === make);
-  }
-
-  if (model) {
-    result = vehicles.filter((item) => item.details.model === model);
-  }
-  
-  res.json(result);
 });
 
 router.post("/create", async (req, res) => {

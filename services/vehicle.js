@@ -4,10 +4,10 @@ async function getVehicle(id) {
   return await Vehicle.findById(id);
 }
 
-async function getVehicles() {
-  return await Vehicle.find({});
-}
-
+async function getVehicles(filter) {
+  const vehicles = await Vehicle.find(filter);
+  return vehicles;
+}                                                                                                                                                                                          
 async function createVehicle(data) {
   const vehicle = new Vehicle(data);
   await vehicle.save();

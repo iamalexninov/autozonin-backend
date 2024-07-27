@@ -1,7 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { SALT_ROUNDS, SECRET } = require("../config/config");
 
 const blacklist = [];
 
@@ -46,7 +45,7 @@ function logout(token) {
 }
 
 async function hashPassword(password) {
-  return await bcrypt.hash(password, SALT_ROUNDS);
+  return await bcrypt.hash(password, process.env.SALT_ROUNDS);
 }
 
 function createSession(user) {
@@ -57,13 +56,13 @@ function createSession(user) {
     // type: user.type,
     accessToken: jwt.sign(
       { _id: user._id, email: user.email, username: user.username },
-      SECRET
+      process.env.SECRET
     ),
   };
 }
 
 function verifySession(token) {
-  const payload = jwt.verify(token, SECRET);
+  const payload = jwt.verify(token, process.env.SECRET);
 
   return {
     _id: payload._id,
